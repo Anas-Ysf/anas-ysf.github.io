@@ -3,87 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name - Portfolio</title>
+    <title>Your Name | Developer</title>
     <style>
-        /* Simple Reset */
+        /* Modern but clean base */
+        :root {
+            --primary: #2563eb;  /* Blue */
+            --secondary: #7c3aed; /* Purple */
+            --dark: #1e293b;
+            --light: #f8fafc;
+        }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Inter', sans-serif;
+            background: var(--light);
+            color: var(--dark);
             line-height: 1.6;
-            color: #333;
-            background: #f9f9f9;
         }
 
-        /* Navigation */
+        /* Navbar (fixed, clean) */
         nav {
-            background: #0a0a0a;
-            padding: 1rem;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 1rem 2rem;
             position: fixed;
             width: 100%;
-            top: 0;
+            z-index: 100;
         }
         nav ul {
             display: flex;
-            list-style: none;
             gap: 1.5rem;
-            justify-content: center;
+            list-style: none;
         }
         nav a {
-            color: white;
             text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
         }
-        nav a:hover { color: #00d4ff; }
+        nav a:hover { color: var(--primary); }
 
-        /* Sections */
-        section { padding: 4rem 1rem; max-width: 800px; margin: 0 auto; }
-        h1 { font-size: 2.5rem; margin-bottom: 1rem; }
-        h2 { font-size: 2rem; text-align: center; margin-bottom: 2rem; }
-
-        /* Hero */
+        /* Hero (gradient + subtle animation) */
         #hero {
             height: 100vh;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
             text-align: center;
-            background: linear-gradient(135deg, #00d4ff, #ff6b6b);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
         }
+        #hero h1 { font-size: 3rem; margin-bottom: 1rem; }
+        #hero p { font-size: 1.2rem; opacity: 0.9; }
+        .cta {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 0.8rem 1.5rem;
+            background: white;
+            color: var(--primary);
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s;
+        }
+        .cta:hover { transform: translateY(-3px); }
 
-        /* Projects Grid */
-        .projects {
+        /* Sections */
+        section { padding: 5rem 1rem; max-width: 1000px; margin: 0 auto; }
+        h2 { 
+            font-size: 2.2rem; 
+            text-align: center; 
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+
+        /* Projects (cards with hover) */
+        .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
+            gap: 2rem;
         }
-        .project {
+        .project-card {
             background: white;
-            border-radius: 8px;
-            padding: 1.5rem;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        .project-img {
+            height: 180px;
+            background: #ddd; /* Replace with your image! */
+            background-size: cover;
+        }
+        .project-content { padding: 1.5rem; }
+        .project-content h3 { margin-bottom: 0.5rem; color: var(--primary); }
+        .project-links { margin-top: 1rem; }
+        .project-links a {
+            color: var(--primary);
+            text-decoration: none;
+            margin-right: 1rem;
+            font-weight: 500;
+        }
+
+        /* Skills (minimal icons) */
+        .skills { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
+        .skill { 
+            background: white; 
+            padding: 1rem 1.5rem; 
+            border-radius: 8px; 
             box-shadow: 0 3px 10px rgba(0,0,0,0.1);
         }
-        .project img { width: 100%; border-radius: 5px; margin-bottom: 1rem; }
 
-        /* Skills */
-        .skills { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
-        .skill { background: white; padding: 1rem; border-radius: 5px; }
-
-        /* Contact */
-        #contact { background: #0a0a0a; color: white; text-align: center; }
-        .contact-links { display: flex; gap: 1rem; justify-content: center; margin-top: 1rem; }
-        .contact-links a { color: #00d4ff; }
+        /* Contact (dark bg) */
+        #contact { 
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            border-radius: 20px;
+            margin: 2rem auto;
+        }
+        .contact-links {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        .contact-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .contact-links a:hover { color: var(--primary); }
 
         /* Mobile */
-        @media (max-width: 600px) {
-            .projects { grid-template-columns: 1fr; }
-            nav ul { gap: 1rem; }
+        @media (max-width: 768px) {
+            nav ul { justify-content: center; }
+            #hero h1 { font-size: 2.2rem; }
+            .projects-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
+    <!-- Nav -->
     <nav>
         <ul>
             <li><a href="#hero">Home</a></li>
@@ -93,58 +166,69 @@
         </ul>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Hero -->
     <section id="hero">
-        <h1>Hi, I'm [Your Name]</h1>
-        <p>Aspiring Frontend Developer</p>
-        <a href="#projects" style="color: white; margin-top: 1rem;">↓ My Work</a>
+        <div>
+            <h1>Hey, I'm [Your Name]</h1>
+            <p>I build things for the web.</p>
+            <a href="#projects" class="cta">See My Work</a>
+        </div>
     </section>
 
     <!-- Projects -->
     <section id="projects">
         <h2>My Projects</h2>
-        <div class="projects">
-            <div class="project">
-                <img src="https://via.placeholder.com/400x200" alt="Project Screenshot">
-                <h3>Todo App</h3>
-                <p>A simple todo app with local storage.</p>
-                <p><strong>Tech:</strong> HTML, CSS, JavaScript</p>
-                <a href="#">Live Demo</a> | <a href="#">GitHub</a>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-img" style="background: #4ade80;"></div>
+                <div class="project-content">
+                    <h3>Todo App</h3>
+                    <p>A clean task manager with local storage.</p>
+                    <div class="project-links">
+                        <a href="#">Live Demo</a>
+                        <a href="#">Code</a>
+                    </div>
+                </div>
             </div>
-            <div class="project">
-                <img src="https://via.placeholder.com/400x200" alt="Project Screenshot">
-                <h3>Weather App</h3>
-                <p>Fetches weather data from an API.</p>
-                <p><strong>Tech:</strong> JavaScript, API</p>
-                <a href="#">Live Demo</a> | <a href="#">GitHub</a>
+            <div class="project-card">
+                <div class="project-img" style="background: #60a5fa;"></div>
+                <div class="project-content">
+                    <h3>Weather App</h3>
+                    <p>Real-time weather data from an API.</p>
+                    <div class="project-links">
+                        <a href="#">Live Demo</a>
+                        <a href="#">Code</a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Skills -->
     <section id="skills">
-        <h2>My Skills</h2>
+        <h2>Skills</h2>
         <div class="skills">
-            <div class="skill">HTML</div>
-            <div class="skill">CSS</div>
+            <div class="skill">HTML/CSS</div>
             <div class="skill">JavaScript</div>
+            <div class="skill">React</div>
+            <div class="skill">Node.js</div>
             <div class="skill">Git</div>
         </div>
     </section>
 
     <!-- Contact -->
     <section id="contact">
-        <h2>Get In Touch</h2>
-        <p>Let's build something together!</p>
+        <h2>Let's Connect</h2>
+        <p>Open to collaborations and new opportunities!</p>
         <div class="contact-links">
-            <a href="mailto:youremail@example.com">Email</a>
-            <a href="https://github.com/yourusername">GitHub</a>
-            <a href="https://linkedin.com/in/yourprofile">LinkedIn</a>
+            <a href="mailto:you@example.com">Email</a>
+            <a href="https://github.com/you">GitHub</a>
+            <a href="https://linkedin.com/in/you">LinkedIn</a>
         </div>
     </section>
 
     <script>
-        // Smooth scrolling (simple JS)
+        // Smooth scrolling only
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
